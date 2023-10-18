@@ -1,6 +1,7 @@
 #include "collision.h"
 
 #include <corecrt_math.h>
+#include <stdbool.h>
 #include <stdio.h>
 
 #include "../entities/Point.h"
@@ -14,36 +15,17 @@ Point calculate_direction(const hitbox p1, const hitbox p2)
 {
 	Point direction;
 	const float dist = distance(p1.center, p2.center);
-	
-	printf("distance %.2f and radius %.2f\n", dist, distance(p2.top_left, p2.center));
 
-	//printf("Top-Left     - X:%.2f Y:%.2f\n", p2.top_left.x,     p2.top_left.y);
-	//printf("Top-Right    - X:%.2f Y:%.2f\n", p2.top_right.x,    p2.top_right.y);
-	//printf("Center       - X:%.2f Y:%.2f\n", p2.center.x,       p2.center.y);
-	//printf("Bottom-Left  - X:%.2f Y:%.2f\n", p2.bottom_left.x,  p2.bottom_left.y);
-	//printf("Bottom-Right - X:%.2f Y:%.2f\n", p2.bottom_right.x, p2.bottom_right.y);
-
-	printf("Player Top-Left X is bigger than enemy Top-Right? \n Player - X:%.2f Y:%.2f\n Enemy - X:%.2f Y:%.2f\n\n",
-		p2.top_left.x, p2.top_left.y, p1.top_right.x, p1.top_right.y);
-	printf("Player Top-Left Y is bigger than enemy Bottom-Left? \n Player - X:%.2f Y:%.2f\n Enemy - X:%.2f Y:%.2f\n\n",
-		p2.top_left.x, p2.top_left.y, p1.bottom_right.x, p1.bottom_left.y);
-
-
-
-	//if (dist > p2.center.x - (p2.top_right.x - (p2.width)) && dist > p2.center.y - (p2.bottom_right.y - (p2.height))) {
-	/*if ((p1.center.x - h_radius < p2.top_right.x && (p1.center.y + v_radius > p2.top_right.y && p1.center.y - v_radius < p2.bottom_right.y)) 
-		&& (p1.center.x + h_radius > p2.top_left.x && (p1.center.y + v_radius > p2.top_left.y && p1.center.y - v_radius < p2.bottom_left.y))) {*/
 	if(p2.top_left.x > p1.top_right.x 
 		|| p2.top_right.x < p1.top_left.x
 		|| p2.top_left.y > p1.bottom_left.y
-		|| p2.bottom_left.y < p1.top_left.y){
-		
-		printf("actually works\n");
+		|| p2.bottom_left.y < p1.top_left.y)
+	{
 		direction.x = (p2.center.x - p1.center.x) / dist;
 		direction.y = (p2.center.y - p1.center.y) / dist;
 	}
-	else {
-		
+	else 
+	{
 		direction.x = 0;
 		direction.y = 0;
 	}

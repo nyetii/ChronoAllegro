@@ -11,26 +11,6 @@
 #include "movement.h"
 #include "../entities/enemy.h"
 
-//float distance(Point p1, Point p2) {
-//	return sqrtf(powf(p2.x - p1.x, 2) + powf(p2.y - p1.y, 2));
-//}
-
-Point calculateDirection(Point p1, Point p2) {
-	Point direction;
-	float dist = distance(p1, p2);
-
-	if (dist > 10) {
-		direction.x = (p2.x - p1.x) / dist;
-		direction.y = (p2.y - p1.y) / dist;
-	}
-	else {
-		direction.x = 0;
-		direction.y = 0;
-	}
-
-	return direction;
-}
-
 int run_event_loop(ALLEGRO_EVENT_QUEUE* queue, ALLEGRO_TIMER* timer)
 {
 	ALLEGRO_FONT* font = al_create_builtin_font();
@@ -112,7 +92,7 @@ int run_event_loop(ALLEGRO_EVENT_QUEUE* queue, ALLEGRO_TIMER* timer)
 		if (enemy->point.y > player->point.y)
 			enemy->point.y -= 0.1f;*/
 
-		Point direction = calculate_direction(enemy->hitbox, player->hitbox);
+		const Point direction = calculate_direction(enemy->hitbox, player->hitbox);
 
 		// Move the enemy towards the player by the specified speed
 		enemy->point.x += direction.x * 0.1f;

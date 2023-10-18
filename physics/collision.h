@@ -8,12 +8,7 @@ typedef struct hitbox
 	Point bottom_right;
 
 	Point center;
-
-	float top;
-	float left;
-	float bottom;
-	float right;
-
+	
 	float width;
 	float height;
 } hitbox;
