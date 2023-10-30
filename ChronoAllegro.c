@@ -17,35 +17,11 @@
 #include "core/event_loop.h"
 #include "gameplay/taxonomy/taxonomy.h"
 
+
+
 int main(void)
 {
 	Taxonomy* taxonomy = create_taxonomy();
-	Species* species = malloc(sizeof * species);
-	species->name = "paulo";
-
-	add_species(taxonomy, species);
-
-
-	Species* species2 = malloc(sizeof * species);
-	species2->name = "pedro";
-	add_species(taxonomy, species2);
-
-	Species* species3 = malloc(sizeof * species);
-	species3->name = "matheus";
-	add_species(taxonomy, species3);
-
-
-	for(int i = 0; i < taxonomy->size; ++i)
-	{
-		printf("\n\n%s\n", taxonomy->species[i].name);
-	}
-
-	remove_species(taxonomy, species2);
-	for (int i = 0; i < taxonomy->size; ++i)
-	{
-		printf("\n\n%s\n", taxonomy->species[i].name);
-	}
-
 	// Start-up and configuration
 
 	al_init();
@@ -75,11 +51,36 @@ int main(void)
 	
 	// ALLEGRO_BITMAP* yanderedev = create_image("yanderedev-image.png");
 	
+	//Taxonomy* taxonomy = create_taxonomy();
+	Species* species = malloc(sizeof * species);
+	species->name = "paulo";
 
+	add_species(taxonomy, species);
+
+
+	Species* species2 = malloc(sizeof * species);
+	species2->name = "pedro";
+	add_species(taxonomy, species2);
+
+	Species* species3 = malloc(sizeof * species);
+	species3->name = "matheus";
+	add_species(taxonomy, species3);
+
+
+	for (int i = 0; i < taxonomy->size; ++i)
+	{
+		printf("\n\n%s\n", taxonomy->species[i].name);
+	}
+
+	remove_species(taxonomy, species2);
+	for (int i = 0; i < taxonomy->size; ++i)
+	{
+		printf("\n\n%s\n", taxonomy->species[i].name);
+	}
 
 	// This is where the event loop starts
 
-	run_event_loop(queue, timer);
+	run_event_loop(queue, timer, taxonomy);
 
 	// Shutdown
 	//destroy_image(yanderedev);

@@ -14,6 +14,7 @@ Taxonomy* create_taxonomy()
 
 int destroy_taxonomy(Taxonomy* taxonomy)
 {
+	free(taxonomy->species);
 	free(taxonomy);
 	return 1;
 }
@@ -24,15 +25,15 @@ int add_species(Taxonomy* taxonomy, Species* species)
 	taxonomy->species = new_species;
 
 	taxonomy->species[taxonomy->size].name = species->name;
-	taxonomy->size++;
+	++taxonomy->size;
+
+	free(species);
 	return 1;
 }
 
 int remove_species(Taxonomy* taxonomy, Species* species)
 {
 	//taxonomy = realloc(taxonomy, sizeof(*taxonomy) - sizeof(*species));
-
-	int s = taxonomy->size - 1;
 
 	Species* temp = malloc(taxonomy->size * sizeof(*species));
 

@@ -12,17 +12,17 @@
 #include "../entities/enemy.h"
 #include "../entities/entity.h"
 
-int run_event_loop(ALLEGRO_EVENT_QUEUE* queue, ALLEGRO_TIMER* timer)
+int run_event_loop(ALLEGRO_EVENT_QUEUE* queue, ALLEGRO_TIMER* timer, Taxonomy* taxonomy)
 {
 	ALLEGRO_FONT* font = al_create_builtin_font();
 
-	ALLEGRO_BITMAP* yanderedev = create_image("yanderedev-image.png");
+	ALLEGRO_BITMAP* yanderedev = create_image("entities/yanderedev-image2.png");
 
 	bool redraw = true;
 	bool close = false;
 	ALLEGRO_EVENT event;
 
-	Entity* player = create_player();
+	Entity* player = create_player(taxonomy);
 	//Entity* player = malloc(sizeof * player);
 	//Player* player =
 	//	malloc(sizeof *player);
@@ -112,6 +112,10 @@ int run_event_loop(ALLEGRO_EVENT_QUEUE* queue, ALLEGRO_TIMER* timer)
 
 			al_draw_filled_rectangle(player->point.x, player->point.y, player->point.x + player->size.width, player->point.y + player->size.height, get_color(0x4080c4));
 
+			//ALLEGRO_BITMAP* p = player->species.sprite;
+			
+			//al_draw_bitmap(p, 10, 10, 0);
+			draw_resized_image(player->species.sprite, player->point.x, player->point.y, 10, 10);
 
 			al_draw_filled_rectangle(enemy->point.x, enemy->point.y, enemy->point.x + enemy->size.width, enemy->point.y + enemy->size.height, get_color(0xFF80c430));
 			
