@@ -13,4 +13,5 @@ ALLEGRO_BITMAP* create_image(char* name)
 void destroy_image(ALLEGRO_BITMAP* image)
 {
 	al_destroy_bitmap(image);
+	free(image);
 }

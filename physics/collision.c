@@ -33,7 +33,7 @@ Point calculate_direction(const hitbox p1, const hitbox p2)
 	return direction;
 }
 
-void create_hitbox(hitbox* hitbox, const Point point, const size size)
+void create_hitbox(hitbox* hitbox, const Point point, const Size size)
 {
 	const float h_radius = size.width / 2.0f;
 	const float v_radius = size.height / 2.0f;

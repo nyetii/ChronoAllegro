@@ -5,8 +5,8 @@ typedef struct Point
 	float y;
 } Point;
 
-typedef struct size
+typedef struct Size
 {
 	float width;
 	float height;
-} size;
+} Size;

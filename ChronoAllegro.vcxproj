@@ -143,12 +143,14 @@
     <ClCompile Include="ChronoAllegro.c" />
     <ClCompile Include="core\core_configuration.c" />
     <ClCompile Include="core\color.c" />
+    <ClCompile Include="entities\entity.c" />
     <ClCompile Include="entities\player.c" />
-    <ClCompile Include="entities\Point.c" />
+    <ClCompile Include="entities\point.c" />
     <ClCompile Include="core\event_loop.c" />
     <ClCompile Include="core\image.c" />
     <ClCompile Include="core\movement.c" />
     <ClCompile Include="entities\enemy.c" />
+    <ClCompile Include="gameplay\taxonomy\taxonomy.c" />
     <ClCompile Include="physics\collision.c" />
   </ItemGroup>
   <ItemGroup>
@@ -157,12 +159,15 @@
   <ItemGroup>
     <ClInclude Include="core\core_configuration.h" />
     <ClInclude Include="core\color.h" />
+    <ClInclude Include="entities\entity.h" />
     <ClInclude Include="entities\player.h" />
-    <ClInclude Include="entities\Point.h" />
+    <ClInclude Include="entities\point.h" />
     <ClInclude Include="core\event_loop.h" />
     <ClInclude Include="core\image.h" />
     <ClInclude Include="core\movement.h" />
     <ClInclude Include="entities\enemy.h" />
+    <ClInclude Include="gameplay\taxonomy\species.h" />
+    <ClInclude Include="gameplay\taxonomy\taxonomy.h" />
     <ClInclude Include="physics\collision.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

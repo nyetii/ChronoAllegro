@@ -17,4 +17,4 @@ float distance(Point p1, Point p2);
 
 Point calculate_direction(hitbox p1, hitbox p2);
 
-void create_hitbox(hitbox* hitbox, const Point point, const size size);
+void create_hitbox(hitbox* hitbox, const Point point, const Size size);

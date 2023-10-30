@@ -1,10 +1,10 @@
 #include <stdbool.h>
 #include "Point.h"
 
-#include "player.h"
+#include "Player.h"
 
-//typedef struct player
+//typedef struct Player
 //{
 //	bool alive;
 //	Point* Point;
-//} player;
+//} Player;

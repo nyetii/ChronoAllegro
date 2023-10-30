@@ -10,6 +10,7 @@
 #include "../core/color.h"
 #include "movement.h"
 #include "../entities/enemy.h"
+#include "../entities/entity.h"
 
 int run_event_loop(ALLEGRO_EVENT_QUEUE* queue, ALLEGRO_TIMER* timer)
 {
@@ -21,16 +22,18 @@ int run_event_loop(ALLEGRO_EVENT_QUEUE* queue, ALLEGRO_TIMER* timer)
 	bool close = false;
 	ALLEGRO_EVENT event;
 
-	player* player =
-		malloc(sizeof *player);
+	Entity* player = create_player();
+	//Entity* player = malloc(sizeof * player);
+	//Player* player =
+	//	malloc(sizeof *player);
 	
-	player->point.x = 100;
+	/*player->point.x = 100;
 	player->point.y = 100;
 	player->size.width = 64;
-	player->size.height = 128;
+	player->size.height = 128;*/
 
 
-	enemy* enemy = malloc(sizeof * enemy);
+	Enemy* enemy = malloc(sizeof * enemy);
 
 	enemy->point.x = 200;
 	enemy->point.y = 200;
@@ -45,13 +48,13 @@ int run_event_loop(ALLEGRO_EVENT_QUEUE* queue, ALLEGRO_TIMER* timer)
 	al_start_timer(timer);
 	while (true)
  	{
-		//player->hitbox.center.x = player->point.x;
-		//player->hitbox.center.y = player->point.y;
+		//Player->hitbox.center.x = Player->point.x;
+		//Player->hitbox.center.y = Player->point.y;
 		create_hitbox(&player->hitbox, player->point, player->size);
 		create_hitbox(&enemy->hitbox, enemy->point, enemy->size);
 
-		//player->hitbox[1].x = player->point.x + 10;
-		//player->hitbox[1].y = player->point.y + 10;
+		//Player->hitbox[1].x = Player->point.x + 10;
+		//Player->hitbox[1].y = Player->point.y + 10;
 
 		al_wait_for_event(queue, &event);
 
@@ -79,22 +82,22 @@ int run_event_loop(ALLEGRO_EVENT_QUEUE* queue, ALLEGRO_TIMER* timer)
 		if (close)
 			break;
 
-		// enemy logic
-		/*if(enemy->point.x < player->point.x)
-			enemy->point.x += 0.1f;
+		// Enemy logic
+		/*if(Enemy->point.x < Player->point.x)
+			Enemy->point.x += 0.1f;
 
-		if(enemy->point.x > player->point.x)
-			enemy->point.x -= 0.1f;
+		if(Enemy->point.x > Player->point.x)
+			Enemy->point.x -= 0.1f;
 
-		if(enemy->point.y < player->point.y)
-			enemy->point.y += 0.1f;
+		if(Enemy->point.y < Player->point.y)
+			Enemy->point.y += 0.1f;
 
-		if (enemy->point.y > player->point.y)
-			enemy->point.y -= 0.1f;*/
+		if (Enemy->point.y > Player->point.y)
+			Enemy->point.y -= 0.1f;*/
 
 		const Point direction = calculate_direction(enemy->hitbox, player->hitbox);
 
-		// Move the enemy towards the player by the specified speed
+		// Move the Enemy towards the Player by the specified speed
 		enemy->point.x += direction.x * 0.1f;
 		enemy->point.y += direction.y * 0.1f;
 		

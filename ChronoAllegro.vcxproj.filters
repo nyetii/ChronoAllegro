@@ -31,6 +31,18 @@
     <Filter Include="Source Files\Physics">
       <UniqueIdentifier>{0d57aef9-2bba-495a-a8a1-d0f4b26524dd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Gameplay">
+      <UniqueIdentifier>{cefc7343-dfee-4f35-afb4-c1d4a85a131d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Gameplay\Taxonomy">
+      <UniqueIdentifier>{88c81a9b-f56d-4a14-8bc1-77d2ef09965b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Gameplay">
+      <UniqueIdentifier>{fe982830-0194-4aa9-a030-320889f89874}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Gameplay\Taxonomy">
+      <UniqueIdentifier>{489fe9d9-e212-4b35-8b97-55f05eeece29}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ChronoAllegro.c">
@@ -48,7 +60,7 @@
     <ClCompile Include="entities\player.c">
       <Filter>Source Files\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="entities\Point.c">
+    <ClCompile Include="entities\point.c">
       <Filter>Source Files\Entities</Filter>
     </ClCompile>
     <ClCompile Include="core\color.c">
@@ -62,6 +74,12 @@
     </ClCompile>
     <ClCompile Include="physics\collision.c">
       <Filter>Source Files\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="entities\entity.c">
+      <Filter>Source Files\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="gameplay\taxonomy\taxonomy.c">
+      <Filter>Source Files\Gameplay\Taxonomy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -80,7 +98,7 @@
     <ClInclude Include="entities\player.h">
       <Filter>Header Files\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="entities\Point.h">
+    <ClInclude Include="entities\point.h">
       <Filter>Header Files\Entities</Filter>
     </ClInclude>
     <ClInclude Include="core\color.h">
@@ -94,6 +112,15 @@
     </ClInclude>
     <ClInclude Include="physics\collision.h">
       <Filter>Header Files\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="entities\entity.h">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="gameplay\taxonomy\taxonomy.h">
+      <Filter>Header Files\Gameplay\Taxonomy</Filter>
+    </ClInclude>
+    <ClInclude Include="gameplay\taxonomy\species.h">
+      <Filter>Header Files\Gameplay\Taxonomy</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

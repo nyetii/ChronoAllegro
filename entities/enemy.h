@@ -1,12 +1,12 @@
 #pragma once
 #include "../entities/Point.h"
 #include "../physics/collision.h"
-typedef struct enemy
+typedef struct Enemy
 {
 	bool alive;
 	Point point;
 
-	size size;
+	Size size;
 
 	hitbox hitbox;
-} enemy;
+} Enemy;

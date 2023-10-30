@@ -10,17 +10,17 @@ typedef enum collided
 	right = 8
 } collided;
 
-typedef struct player
+typedef struct Player
 {
 	bool alive;
 	Point point;
 
-	size size;
+	Size size;
 
 	//Point hitbox[2];
 	hitbox hitbox;
 
 
 	collided collided;
-} player;
+} Player;
 
