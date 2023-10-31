@@ -15,6 +15,8 @@ Entity* create_player(const Taxonomy* taxonomy)
 
 	player->species = TAXONOMY->species[0];
 	player->species.sprite = TAXONOMY->species[0].sprite;
+	player->cooldown = 120;
+	player->wiggle = 0;
 	player->type = PLAYER;
 	player->point.x = 100;
 	player->point.y = 100;
@@ -32,6 +34,7 @@ Entity* create_npc(const Taxonomy* taxonomy, const int index)
 	npc->species = TAXONOMY->species[index];
 	npc->species.sprite = TAXONOMY->species[index].sprite;
 	npc->alive = true;
+	npc->cooldown = 120;
 	npc->type = NPC;
 	npc->point = spawnpoint();
 	npc->size.width = al_get_bitmap_width(npc->species.sprite) * 0.1;
@@ -55,4 +58,29 @@ Point spawnpoint(void)
 		point.y = y;
 
 	return point;
+}
+
+bool despawn_entity(Entity* entity)
+{
+	free(entity);
+	return true;
+}
+
+int closest(const Entity* entity[], Entity* player, const int length)
+{
+	int closest = 99999;
+	float cdist = 99999;
+
+	for (int i = 0; i < length; ++i)
+	{
+		const float dist = distance(entity[i]->point, player->point);
+
+		if (dist > cdist)
+			continue;
+
+		cdist = dist;
+		closest = i;
+	}
+
+	return closest;
 }

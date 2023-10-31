@@ -1,5 +1,6 @@
 #pragma once
 #include "../entities/Point.h"
+
 typedef struct hitbox
 {
 	Point top_left;

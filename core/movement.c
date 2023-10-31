@@ -6,11 +6,14 @@
 #include <allegro5/keycodes.h>
 
 #include "../entities/entity.h"
+#include "../gameplay/combat.h"
 
 #define PI 3.14159265358979323846
 
 void movement(const ALLEGRO_KEYBOARD_STATE ks, Entity* player)
 {
+	--player->cooldown;
+
 	double radians = to_radians(player->angle);
 	if (radians > 2 * PI)
 		player->angle = to_degrees(radians - (2 * PI));
@@ -18,7 +21,7 @@ void movement(const ALLEGRO_KEYBOARD_STATE ks, Entity* player)
 	if (radians < 0)
 		player->angle = to_degrees(radians + (2 * PI));
 
-	printf("\nRadians: %.2f", to_radians(player->angle));
+	//printf("\nRadians: %.2f", to_radians(player->angle));
 	if (al_key_down(&ks, ALLEGRO_KEY_UP))
 	{
 		/*if (player->angle >= 1.0f && player->angle < 180.0f)
@@ -90,16 +93,36 @@ void movement(const ALLEGRO_KEYBOARD_STATE ks, Entity* player)
 		player->point.x++;
 	}
 
-	// Attack
+	int rng = rand() % 2;
 
+	if (player->wiggle == 0)
+		player->wiggle += rng == 0 ? -1 : 1;
+	if (player->wiggle == 1)
+		--player->wiggle;
+	if (player->wiggle == -1)
+		++player->wiggle;
+
+	player->angle += player->wiggle * 3;
+
+	// Attack
+	if (al_key_down(&ks, ALLEGRO_KEY_E))
+	{
+		player->key_pressed = ALLEGRO_KEY_E;
+	}
 }
 
-void npc_movement(Entity* entity, hitbox p_hitbox)
+void npc_movement(Entity* entity, Entity* player)
 {
-	const Point direction = calculate_direction(entity->hitbox, p_hitbox);
+	--entity->cooldown;
+	const Point direction = calculate_direction(entity->hitbox, player->hitbox);
 
-	double deltaY = p_hitbox.top_left.y - entity->point.y;
-	double deltaX = p_hitbox.top_left.x - entity->point.x;
+	if(direction.x == 0 && direction.y == 0)
+	{
+		combat_attack(entity, player);
+	}
+
+	double deltaY = player->hitbox.top_left.y - entity->point.y;
+	double deltaX = player->hitbox.top_left.x - entity->point.x;
 
 	double tan = atan2(deltaY, deltaX);
 

@@ -11,18 +11,21 @@
 #include "movement.h"
 #include "../entities/enemy.h"
 #include "../entities/entity.h"
+#include "../gameplay/combat.h"
 
 int run_event_loop(ALLEGRO_EVENT_QUEUE* queue, ALLEGRO_TIMER* timer, Taxonomy* taxonomy)
 {
 	ALLEGRO_FONT* font = al_create_builtin_font();
 
-	ALLEGRO_BITMAP* yanderedev = create_image("entities/yanderedev-image2.png");
+	ALLEGRO_BITMAP* grass = create_image("entities/grass.png");
 
 	bool redraw = true;
 	bool close = false;
 	ALLEGRO_EVENT event;
 
-	Entity* enemy[20];
+	const int size = 5;
+
+	Entity* enemy[5];
 	Entity* player = create_player(taxonomy);
 	//Entity* player = malloc(sizeof * player);
 	//Player* player =
@@ -45,7 +48,7 @@ int run_event_loop(ALLEGRO_EVENT_QUEUE* queue, ALLEGRO_TIMER* timer, Taxonomy* t
 	//x = 100;
 	//y = 100;
 	srand(time(NULL));
-	for (int i = 0; i < 20; ++i)
+	for (int i = 0; i < size; ++i)
 	{
 		enemy[i] = create_npc(taxonomy, 1);
 
@@ -57,10 +60,11 @@ int run_event_loop(ALLEGRO_EVENT_QUEUE* queue, ALLEGRO_TIMER* timer, Taxonomy* t
 	al_start_timer(timer);
 	while (true)
  	{
-		for(int i = 0; i < 20; ++i)
+		for(int i = 0; i < size; ++i)
 		{
-			if(enemy[i]->alive == false)
+			if (enemy[i]->alive == false)
 				enemy[i] = create_npc(taxonomy, 1);
+				
 
 			create_hitbox(&enemy[i]->hitbox, enemy[i]->point, enemy[i]->size);
 		}
@@ -124,16 +128,46 @@ int run_event_loop(ALLEGRO_EVENT_QUEUE* queue, ALLEGRO_TIMER* timer, Taxonomy* t
 		//enemy->point.x += direction.x * 0.2f;
 		//enemy->point.y += direction.y * 0.2f;
 
-		for (int i = 0; i < 20; ++i)
+		for (int i = 0; i < size; ++i)
 		{
 			if (enemy[i]->alive == true)
-				npc_movement(enemy[i], player->hitbox);
+				npc_movement(enemy[i], player);
+			else
+				despawn_entity(enemy[i]);
 		}
-		
+
+		if (player->key_pressed == ALLEGRO_KEY_E)
+		{
+			if (player->cooldown > 0)
+				goto leave;
+
+			printf("E is pressed");
+
+			int c = closest(enemy, player, size);
+			combat_attack(player, enemy[c]);
+			player->key_pressed = 0;
+		}
+		leave:
 
 		if (redraw && al_is_event_queue_empty(queue))
 		{
+			if(player->alive == false)
+			{
+				printf("\n\nDEAD DEAD DEAD");
+				al_draw_textf(font, al_map_rgb(255, 255, 255), 300, 300, 0, "Game Over");
+				close = true;
+			}
+
 			al_clear_to_color(al_map_rgb(20, 20, 20));
+
+
+			for(int x = 0; x < 1280; x = x + 16)
+				for(int y = 0; y < 720; y = y + 16)
+				{
+					al_draw_bitmap(grass, x, y, 0);
+				}
+
+
 			//al_draw_text(font, al_map_rgb(255, 20, 255), 50, 60, 0, "Hi there!");
 			//al_draw_tinted_bitmap(yanderedev, al_map_rgba(100, 0, 255, 255), 100, 100, 0);
 
@@ -151,10 +185,13 @@ int run_event_loop(ALLEGRO_EVENT_QUEUE* queue, ALLEGRO_TIMER* timer, Taxonomy* t
 			
 			//al_draw_filled_rectangle(enemy->point.x, enemy->point.y, enemy->point.x + enemy->size.width, enemy->point.y + enemy->size.height, get_color(0xFF80c430));
 
-			for (int i = 0; i < 20; ++i) 
+			for (int i = 0; i < size; ++i) 
 			{
-				if(enemy[i]->alive == true)
-					draw_rotated_image(enemy[i]->species.sprite, enemy[i], enemy[i]->angle);
+				if (enemy[i]->alive == false)
+					continue;
+
+				draw_rotated_image(enemy[i]->species.sprite, enemy[i], enemy[i]->angle);
+				al_draw_textf(font, al_map_rgb(255, 255, 255), enemy[i]->hitbox.center.x, enemy[i]->hitbox.bottom_left.y + 10, 0, "NPC %d - HP: %d", i, enemy[i]->species.hp);
 
 				al_draw_textf(font, al_map_rgb(255, 255, 255), 0, 40 + (i * 10), 0, "NPC %d (X: %.1f Y: %.1f)", i, enemy[i]->point.x, enemy[i]->point.y);
 			}

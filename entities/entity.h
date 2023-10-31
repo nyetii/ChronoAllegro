@@ -15,6 +15,9 @@ typedef struct Entity
 {
 	EntityType type;
 	bool alive;
+	int cooldown;
+	int key_pressed;
+	int wiggle;
 	Point point;
 
 	Size size;
@@ -35,3 +38,5 @@ Point spawnpoint(void);
 bool is_out_of_screen(Entity* entity);
 
 bool despawn_entity(Entity* entity);
+
+int closest(const Entity* entity[], Entity* player, const int length);

@@ -5,6 +5,7 @@
 #include <stdio.h>
 
 #include "../entities/Point.h"
+#include "../entities/entity.h"
 
 float distance(const Point p1, const Point p2)
 {

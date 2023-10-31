@@ -84,6 +84,12 @@
     <ClCompile Include="gameplay\taxonomy\species.c">
       <Filter>Source Files\Gameplay\Taxonomy</Filter>
     </ClCompile>
+    <ClCompile Include="gameplay\combat.h">
+      <Filter>Header Files\Gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="gameplay\combat.c">
+      <Filter>Source Files\Gameplay</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

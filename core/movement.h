@@ -14,7 +14,7 @@ typedef enum Movement
 
 void movement(const ALLEGRO_KEYBOARD_STATE ks, Player* player);
 
-void npc_movement(Entity* entity, hitbox p_hitbox);
+void npc_movement(Entity* entity, Entity* player);
 
 float to_radians(float degree);
 

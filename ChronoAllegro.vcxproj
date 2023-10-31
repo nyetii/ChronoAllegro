@@ -150,6 +150,8 @@
     <ClCompile Include="core\image.c" />
     <ClCompile Include="core\movement.c" />
     <ClCompile Include="entities\enemy.c" />
+    <ClCompile Include="gameplay\combat.c" />
+    <ClCompile Include="gameplay\combat.h" />
     <ClCompile Include="gameplay\taxonomy\species.c" />
     <ClCompile Include="gameplay\taxonomy\taxonomy.c" />
     <ClCompile Include="physics\collision.c" />

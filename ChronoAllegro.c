@@ -55,7 +55,7 @@ int main(void)
 
 	add_species(species);*/
 
-	create_species("paulo", "entities/arrow2.png", 1000, 500, 500);
+	create_species("paulo", "entities/lion.png", 1000, 500, 500);
 
 	int s = create_species("pedro", "entities/arrow3.png", 1000, 500, 500);
 
