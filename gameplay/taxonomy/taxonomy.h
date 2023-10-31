@@ -7,11 +7,13 @@ typedef struct Taxonomy
 	unsigned int size;
 } Taxonomy;
 
-Taxonomy* create_taxonomy();
+Taxonomy* TAXONOMY;
 
-int destroy_taxonomy(Taxonomy* taxonomy);
+Taxonomy* create_taxonomy(void);
+
+int destroy_taxonomy(void);
 
 // Species
-int add_species(Taxonomy* taxonomy, Species* species);
+int add_species(Species species);
 
-int remove_species(Taxonomy* taxonomy, Species* species);
+int remove_species(Species species);

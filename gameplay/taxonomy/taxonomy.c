@@ -4,53 +4,57 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-Taxonomy* create_taxonomy()
+Taxonomy* TAXONOMY;
+
+Taxonomy* create_taxonomy(void)
 {
-	Taxonomy* taxonomy = malloc(sizeof *taxonomy);
-	taxonomy->species = malloc(sizeof(Species));
-	taxonomy->size = 0;
-	return taxonomy;
+	TAXONOMY = malloc(sizeof *TAXONOMY);
+	TAXONOMY->species = malloc(sizeof(Species));
+	TAXONOMY->size = 0;
+	return TAXONOMY;
 }
 
-int destroy_taxonomy(Taxonomy* taxonomy)
+int destroy_taxonomy(void)
 {
-	free(taxonomy->species);
-	free(taxonomy);
+	free(TAXONOMY->species);
+	free(TAXONOMY);
 	return 1;
 }
 
-int add_species(Taxonomy* taxonomy, Species* species)
+int add_species(Species species)
 {
-	Species* new_species = realloc(taxonomy->species, 2 * sizeof(Species));
-	taxonomy->species = new_species;
+	Species* new_species = realloc(TAXONOMY->species, 2 * sizeof(Species));
+	TAXONOMY->species = new_species;
 
-	taxonomy->species[taxonomy->size].name = species->name;
-	++taxonomy->size;
+	const int index = (int)TAXONOMY->size;
 
-	free(species);
-	return 1;
+	TAXONOMY->species[index] = species;
+	++TAXONOMY->size;
+
+	//free(species);
+	return index;
 }
 
-int remove_species(Taxonomy* taxonomy, Species* species)
+int remove_species(Species species)
 {
 	//taxonomy = realloc(taxonomy, sizeof(*taxonomy) - sizeof(*species));
 
-	Species* temp = malloc(taxonomy->size * sizeof(*species));
+	Species* temp = malloc(TAXONOMY->size * sizeof(*temp));
 
-	for(int i = 0, j = 0; i < taxonomy->size; ++i)
+	for(int i = 0, j = 0; i < TAXONOMY->size; ++i)
 	{
-		if (taxonomy->species[i].name == species->name)
+		if (TAXONOMY->species[i].name == species.name)
 			continue;
 
-		temp[j] = taxonomy->species[i];
+		temp[j] = TAXONOMY->species[i];
 		++j;
 	}
 	//free(taxonomy->species);
-	--taxonomy->size;
+	--TAXONOMY->size;
 
 	//taxonomy->species = malloc(taxonomy->size * sizeof(*species));
-	taxonomy->species = realloc(temp, sizeof(*temp));
-	taxonomy->species = temp;
+	TAXONOMY->species = realloc(temp, sizeof(*temp));
+	TAXONOMY->species = temp;
 
 	return 1;
 }

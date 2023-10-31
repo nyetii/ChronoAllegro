@@ -18,10 +18,8 @@
 #include "gameplay/taxonomy/taxonomy.h"
 
 
-
 int main(void)
 {
-	Taxonomy* taxonomy = create_taxonomy();
 	// Start-up and configuration
 
 	al_init();
@@ -51,20 +49,24 @@ int main(void)
 	
 	// ALLEGRO_BITMAP* yanderedev = create_image("yanderedev-image.png");
 	
-	//Taxonomy* taxonomy = create_taxonomy();
-	Species* species = malloc(sizeof * species);
+	Taxonomy* taxonomy = create_taxonomy();
+	/*Species* species = malloc(sizeof * species);
 	species->name = "paulo";
 
-	add_species(taxonomy, species);
+	add_species(species);*/
 
+	create_species("paulo", "entities/arrow2.png", 1000, 500, 500);
 
-	Species* species2 = malloc(sizeof * species);
+	int s = create_species("pedro", "entities/arrow3.png", 1000, 500, 500);
+
+	create_species("matheus", "entities/arrow3.png", 1000, 500, 500);
+	/*Species* species2 = malloc(sizeof * species2);
 	species2->name = "pedro";
-	add_species(taxonomy, species2);
+	add_species(species2);*/
 
-	Species* species3 = malloc(sizeof * species);
+	/*Species* species3 = malloc(sizeof * species3);
 	species3->name = "matheus";
-	add_species(taxonomy, species3);
+	add_species(species3);*/
 
 
 	for (int i = 0; i < taxonomy->size; ++i)
@@ -72,7 +74,7 @@ int main(void)
 		printf("\n\n%s\n", taxonomy->species[i].name);
 	}
 
-	remove_species(taxonomy, species2);
+	//remove_species(taxonomy->species[s]);
 	for (int i = 0; i < taxonomy->size; ++i)
 	{
 		printf("\n\n%s\n", taxonomy->species[i].name);

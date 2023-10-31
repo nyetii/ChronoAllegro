@@ -20,6 +20,7 @@ typedef struct Entity
 	Size size;
 
 	Species species;
+	float angle;
 
 	//Point hitbox[2];
 	hitbox hitbox;
@@ -27,7 +28,7 @@ typedef struct Entity
 
 Entity* create_player(Taxonomy* taxonomy);
 
-Entity* create_npc(Taxonomy* taxonomy);
+Entity* create_npc(Taxonomy* taxonomy, int index);
 
 bool is_out_of_screen(Entity* entity);
 

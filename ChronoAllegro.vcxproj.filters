@@ -81,6 +81,9 @@
     <ClCompile Include="gameplay\taxonomy\taxonomy.c">
       <Filter>Source Files\Gameplay\Taxonomy</Filter>
     </ClCompile>
+    <ClCompile Include="gameplay\taxonomy\species.c">
+      <Filter>Source Files\Gameplay\Taxonomy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

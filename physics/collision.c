@@ -24,7 +24,7 @@ Point calculate_direction(const hitbox p1, const hitbox p2)
 		direction.x = (p2.center.x - p1.center.x) / dist;
 		direction.y = (p2.center.y - p1.center.y) / dist;
 	}
-	else 
+	else
 	{
 		direction.x = 0;
 		direction.y = 0;
