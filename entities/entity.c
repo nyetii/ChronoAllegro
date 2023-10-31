@@ -1,6 +1,7 @@
 #pragma once
 #include "entity.h"
 
+#include <math.h>
 #include <stdlib.h>
 
 #include "../core/image.h"
@@ -30,12 +31,28 @@ Entity* create_npc(const Taxonomy* taxonomy, const int index)
 
 	npc->species = TAXONOMY->species[index];
 	npc->species.sprite = TAXONOMY->species[index].sprite;
+	npc->alive = true;
 	npc->type = NPC;
-	npc->point.x = 100;
-	npc->point.y = 100;
+	npc->point = spawnpoint();
 	npc->size.width = al_get_bitmap_width(npc->species.sprite) * 0.1;
 	npc->size.height = al_get_bitmap_height(npc->species.sprite) * 0.1;
 	npc->angle = 0;
 
 	return npc;
+}
+
+Point spawnpoint(void)
+{
+	
+	int x = rand() % 1280;
+	int y = rand() % 720;
+
+	int sign = rand() % 2;
+
+	Point point;
+
+		point.x = x;
+		point.y = y;
+
+	return point;
 }

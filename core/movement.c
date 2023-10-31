@@ -94,6 +94,23 @@ void movement(const ALLEGRO_KEYBOARD_STATE ks, Entity* player)
 
 }
 
+void npc_movement(Entity* entity, hitbox p_hitbox)
+{
+	const Point direction = calculate_direction(entity->hitbox, p_hitbox);
+
+	double deltaY = p_hitbox.top_left.y - entity->point.y;
+	double deltaX = p_hitbox.top_left.x - entity->point.x;
+
+	double tan = atan2(deltaY, deltaX);
+
+	//double angle = p_hitbox.center.y + 10.0 / entity->point.x;
+	entity->angle = to_degrees(tan);
+
+	// Move the Enemy towards the Player by the specified speed
+	entity->point.x += direction.x * 0.2f;
+	entity->point.y += direction.y * 0.2f;
+}
+
 float to_radians(float degree)
 {
 	return degree * (PI / 180.0);

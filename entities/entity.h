@@ -30,6 +30,8 @@ Entity* create_player(Taxonomy* taxonomy);
 
 Entity* create_npc(Taxonomy* taxonomy, int index);
 
+Point spawnpoint(void);
+
 bool is_out_of_screen(Entity* entity);
 
 bool despawn_entity(Entity* entity);

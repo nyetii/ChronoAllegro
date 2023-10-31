@@ -22,6 +22,7 @@ int run_event_loop(ALLEGRO_EVENT_QUEUE* queue, ALLEGRO_TIMER* timer, Taxonomy* t
 	bool close = false;
 	ALLEGRO_EVENT event;
 
+	Entity* enemy[20];
 	Entity* player = create_player(taxonomy);
 	//Entity* player = malloc(sizeof * player);
 	//Player* player =
@@ -32,8 +33,8 @@ int run_event_loop(ALLEGRO_EVENT_QUEUE* queue, ALLEGRO_TIMER* timer, Taxonomy* t
 	player->size.width = 64;
 	player->size.height = 128;*/
 
-
-	Entity* enemy = create_npc(taxonomy, 1);
+	int count = 0;
+	//Entity* enemy = create_npc(taxonomy, 1);
 
 	//enemy->point.x = 200;
 	//enemy->point.y = 200;
@@ -43,16 +44,37 @@ int run_event_loop(ALLEGRO_EVENT_QUEUE* queue, ALLEGRO_TIMER* timer, Taxonomy* t
 	//float x, y;
 	//x = 100;
 	//y = 100;
+	srand(time(NULL));
+	for (int i = 0; i < 20; ++i)
+	{
+		enemy[i] = create_npc(taxonomy, 1);
+
+		create_hitbox(&enemy[i]->hitbox, enemy[i]->point, enemy[i]->size);
+	}
 
 	ALLEGRO_KEYBOARD_STATE ks;
 
 	al_start_timer(timer);
 	while (true)
  	{
+		for(int i = 0; i < 20; ++i)
+		{
+			if(enemy[i]->alive == false)
+				enemy[i] = create_npc(taxonomy, 1);
+
+			create_hitbox(&enemy[i]->hitbox, enemy[i]->point, enemy[i]->size);
+		}
+		/*if(count == 0)
+		{
+			
+			
+			count = 120;
+		}
+		--count;*/
 		//Player->hitbox.center.x = Player->point.x;
 		//Player->hitbox.center.y = Player->point.y;
 		create_hitbox(&player->hitbox, player->point, player->size);
-		create_hitbox(&enemy->hitbox, enemy->point, enemy->size);
+		
 
 		//Player->hitbox[1].x = Player->point.x + 10;
 		//Player->hitbox[1].y = Player->point.y + 10;
@@ -96,11 +118,17 @@ int run_event_loop(ALLEGRO_EVENT_QUEUE* queue, ALLEGRO_TIMER* timer, Taxonomy* t
 		if (Enemy->point.y > Player->point.y)
 			Enemy->point.y -= 0.1f;*/
 
-		const Point direction = calculate_direction(enemy->hitbox, player->hitbox);
+		//const Point direction = calculate_direction(enemy->hitbox, player->hitbox);
 
 		// Move the Enemy towards the Player by the specified speed
-		enemy->point.x += direction.x * 0.2f;
-		enemy->point.y += direction.y * 0.2f;
+		//enemy->point.x += direction.x * 0.2f;
+		//enemy->point.y += direction.y * 0.2f;
+
+		for (int i = 0; i < 20; ++i)
+		{
+			if (enemy[i]->alive == true)
+				npc_movement(enemy[i], player->hitbox);
+		}
 		
 
 		if (redraw && al_is_event_queue_empty(queue))
@@ -119,10 +147,17 @@ int run_event_loop(ALLEGRO_EVENT_QUEUE* queue, ALLEGRO_TIMER* timer, Taxonomy* t
 			//al_draw_bitmap(p, 10, 10, 0);
 			//draw_resized_image(player->species.sprite, player->point.x, player->point.y, 10, 10);
 			draw_rotated_image(player->species.sprite, player, player->angle);
-			printf("\n%.2f", player->angle);
+			
 			
 			//al_draw_filled_rectangle(enemy->point.x, enemy->point.y, enemy->point.x + enemy->size.width, enemy->point.y + enemy->size.height, get_color(0xFF80c430));
-			draw_rotated_image(enemy->species.sprite, enemy, enemy->angle);
+
+			for (int i = 0; i < 20; ++i) 
+			{
+				if(enemy[i]->alive == true)
+					draw_rotated_image(enemy[i]->species.sprite, enemy[i], enemy[i]->angle);
+
+				al_draw_textf(font, al_map_rgb(255, 255, 255), 0, 40 + (i * 10), 0, "NPC %d (X: %.1f Y: %.1f)", i, enemy[i]->point.x, enemy[i]->point.y);
+			}
 
 			al_flip_display();
 
@@ -133,7 +168,7 @@ int run_event_loop(ALLEGRO_EVENT_QUEUE* queue, ALLEGRO_TIMER* timer, Taxonomy* t
 	}
 
 	free(player);
-	free(enemy);
+	//free(enemy);
 	al_destroy_font(font);
 	
 	return 0;
