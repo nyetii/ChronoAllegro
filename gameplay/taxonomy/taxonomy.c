@@ -49,11 +49,12 @@ int remove_species(Species species)
 		temp[j] = TAXONOMY->species[i];
 		++j;
 	}
-	//free(taxonomy->species);
+
+	free(TAXONOMY->species);
 	--TAXONOMY->size;
 
-	//taxonomy->species = malloc(taxonomy->size * sizeof(*species));
-	TAXONOMY->species = realloc(temp, sizeof(*temp));
+	TAXONOMY->species = malloc(TAXONOMY->size * sizeof(Species));
+
 	TAXONOMY->species = temp;
 
 	return 1;
