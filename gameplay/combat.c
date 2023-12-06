@@ -23,6 +23,9 @@ int combat_attack(Entity* offender, Entity* defendant)
 	combat_check_stats(offender);
 	combat_check_stats(defendant);
 
+	if(defendant->species.hp <= 0)
+		++offender->exp;
+
 	return ratio;
 }
 

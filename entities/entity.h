@@ -25,13 +25,22 @@ typedef struct Entity
 	Species species;
 	float angle;
 
+	int level;
+	int exp;
+
 	//Point hitbox[2];
 	hitbox hitbox;
 } Entity;
 
-Entity* create_player(Taxonomy* taxonomy);
+Entity* create_player();
 
-Entity* create_npc(Taxonomy* taxonomy, int index);
+void evolve(Entity* player);
+
+Entity* create_npc(int index);
+
+Entity* create_npc_any();
+
+int first_not_playable(const int index);
 
 Point spawnpoint(void);
 
