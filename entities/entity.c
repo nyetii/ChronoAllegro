@@ -52,9 +52,9 @@ Entity* create_npc(const int index)
 	return npc;
 }
 
-Entity* create_npc_any()
+Entity* create_npc_any(Entity* player)
 {
-	const int index = first_not_playable(rand() % TAXONOMY->size);
+	const int index = first_not_playable(player);
 
 	Entity* npc = malloc(sizeof * npc);
 
@@ -71,7 +71,7 @@ Entity* create_npc_any()
 	return npc;
 }
 
-int first_not_playable(const int index)
+int first_not_playable(Entity* player)
 {
 	/*for(int i = index; i < index + 2; ++i)
 	{
@@ -91,8 +91,8 @@ int first_not_playable(const int index)
 
 	int random = rand() % TAXONOMY->size;
 
-	if (TAXONOMY->species[random].playable == 1)
-		random = first_not_playable(0);
+	if (TAXONOMY->species[random].playable == 1 || TAXONOMY->species[random].minimum_level > player->exp)
+		random = first_not_playable(player);
 
 	return random;
 }

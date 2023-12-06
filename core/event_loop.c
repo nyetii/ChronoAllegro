@@ -50,9 +50,12 @@ int run_event_loop(ALLEGRO_EVENT_QUEUE* queue, ALLEGRO_TIMER* timer, Taxonomy* t
 	//x = 100;
 	//y = 100;
 	srand(time(NULL));
+
+	Entity* player = create_player();
+
 	for (int i = 0; i < size; ++i)
 	{
-		enemy[i] = create_npc_any();
+		enemy[i] = create_npc_any(player);
 
 		create_hitbox(&enemy[i]->hitbox, enemy[i]->point, enemy[i]->size);
 	}
@@ -63,14 +66,14 @@ int run_event_loop(ALLEGRO_EVENT_QUEUE* queue, ALLEGRO_TIMER* timer, Taxonomy* t
 
 	bool setup = true;
 
-	Entity* player = create_player();
+	
 
 	while (true)
 	{
 		for (int i = 0; i < size; ++i)
 		{
 			if (enemy[i]->alive == false)
-				enemy[i] = create_npc_any();
+				enemy[i] = create_npc_any(player);
 
 
 			create_hitbox(&enemy[i]->hitbox, enemy[i]->point, enemy[i]->size);
@@ -191,7 +194,7 @@ int run_event_loop(ALLEGRO_EVENT_QUEUE* queue, ALLEGRO_TIMER* timer, Taxonomy* t
 			//al_draw_text(font, al_map_rgb(255, 20, 255), 50, 60, 0, "Hi there!");
 			//al_draw_tinted_bitmap(yanderedev, al_map_rgba(100, 0, 255, 255), 100, 100, 0);
 
-			if ((player->species.evolution == NULL || player->species.evolution->name != "pedro paulo") && setup)
+			if ((player->species.evolution == NULL || player->species.evolution->name != "Mion Vermelho") && setup)
 			{
 				free(player);
 				destroy_taxonomy();

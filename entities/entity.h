@@ -38,9 +38,9 @@ void evolve(Entity* player);
 
 Entity* create_npc(int index);
 
-Entity* create_npc_any();
+Entity* create_npc_any(Entity* player);
 
-int first_not_playable(const int index);
+int first_not_playable(Entity* player);
 
 Point spawnpoint(void);
 
