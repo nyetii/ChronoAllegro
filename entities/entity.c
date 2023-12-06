@@ -7,7 +7,7 @@
 #include "../core/image.h"
 #include "../gameplay/taxonomy/taxonomy.h"
 
-Entity* create_player(const Taxonomy* taxonomy)
+Entity* create_player()
 {
 	Entity*	player = malloc(sizeof *player);
 
@@ -15,6 +15,7 @@ Entity* create_player(const Taxonomy* taxonomy)
 
 	player->species = TAXONOMY->species[0];
 	player->species.sprite = TAXONOMY->species[0].sprite;
+	player->species.evolution = TAXONOMY->species[0].evolution;
 	player->cooldown = 120;
 	player->wiggle = 0;
 	player->type = PLAYER;
@@ -23,11 +24,18 @@ Entity* create_player(const Taxonomy* taxonomy)
 	player->size.width = al_get_bitmap_width(bmp) * 0.1;
 	player->size.height = al_get_bitmap_height(bmp) * 0.1;
 	player->angle = 181;
+	player->exp = 0;
 
 	return player;
 }
 
-Entity* create_npc(const Taxonomy* taxonomy, const int index)
+void evolve(Entity* player)
+{
+	Species evolution = *player->species.evolution;
+	player->species = evolution;
+}
+
+Entity* create_npc(const int index)
 {
 	Entity* npc = malloc(sizeof * npc);
 
@@ -42,6 +50,51 @@ Entity* create_npc(const Taxonomy* taxonomy, const int index)
 	npc->angle = 0;
 
 	return npc;
+}
+
+Entity* create_npc_any()
+{
+	const int index = first_not_playable(rand() % TAXONOMY->size);
+
+	Entity* npc = malloc(sizeof * npc);
+
+	npc->species = TAXONOMY->species[index];
+	npc->species.sprite = TAXONOMY->species[index].sprite;
+	npc->alive = true;
+	npc->cooldown = 120;
+	npc->type = NPC;
+	npc->point = spawnpoint();
+	npc->size.width = al_get_bitmap_width(npc->species.sprite) * 0.1;
+	npc->size.height = al_get_bitmap_height(npc->species.sprite) * 0.1;
+	npc->angle = 0;
+
+	return npc;
+}
+
+int first_not_playable(const int index)
+{
+	/*for(int i = index; i < index + 2; ++i)
+	{
+		if (&TAXONOMY->species[i] == NULL) continue;
+
+		if (TAXONOMY->species[i].playable == -1)
+			return i;
+	}
+
+	for (int i = index - 1; i > index - 3; --i)
+	{
+		if (&TAXONOMY->species[i] == NULL) continue;
+
+		if (TAXONOMY->species[i].playable == -1)
+			return i;
+	}*/
+
+	int random = rand() % TAXONOMY->size;
+
+	if (TAXONOMY->species[random].playable == 1)
+		random = first_not_playable(0);
+
+	return random;
 }
 
 Point spawnpoint(void)

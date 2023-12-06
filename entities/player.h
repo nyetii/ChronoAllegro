@@ -20,7 +20,6 @@ typedef struct Player
 	//Point hitbox[2];
 	hitbox hitbox;
 
-
 	collided collided;
 } Player;
 

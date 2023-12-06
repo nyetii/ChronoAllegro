@@ -10,6 +10,7 @@ Taxonomy* create_taxonomy(void)
 {
 	TAXONOMY = malloc(sizeof *TAXONOMY);
 	TAXONOMY->species = malloc(sizeof(Species));
+	TAXONOMY->species->evolution = malloc(sizeof(Species));
 	TAXONOMY->size = 0;
 	return TAXONOMY;
 }
@@ -23,8 +24,11 @@ int destroy_taxonomy(void)
 
 int add_species(Species species)
 {
-	Species* new_species = realloc(TAXONOMY->species, 2 * sizeof(Species));
-	TAXONOMY->species = new_species;
+	if (TAXONOMY->size >= 1) 
+	{
+		Species* new_species = realloc(TAXONOMY->species, (TAXONOMY->size + 1) * sizeof(Species));
+		TAXONOMY->species = new_species;
+	}
 
 	const int index = (int)TAXONOMY->size;
 

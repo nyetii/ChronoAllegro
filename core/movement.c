@@ -105,9 +105,9 @@ void movement(const ALLEGRO_KEYBOARD_STATE ks, Entity* player)
 	player->angle += player->wiggle * 3;
 
 	// Attack
-	if (al_key_down(&ks, ALLEGRO_KEY_E))
+	if (al_key_down(&ks, ALLEGRO_KEY_SPACE))
 	{
-		player->key_pressed = ALLEGRO_KEY_E;
+		player->key_pressed = ALLEGRO_KEY_SPACE;
 	}
 }
 
@@ -130,8 +130,8 @@ void npc_movement(Entity* entity, Entity* player)
 	entity->angle = to_degrees(tan);
 
 	// Move the Enemy towards the Player by the specified speed
-	entity->point.x += direction.x * 0.2f;
-	entity->point.y += direction.y * 0.2f;
+	entity->point.x += direction.x * entity->species.speed;
+	entity->point.y += direction.y * entity->species.speed;
 }
 
 float to_radians(float degree)
