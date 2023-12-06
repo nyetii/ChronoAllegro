@@ -144,12 +144,9 @@
     <ClCompile Include="core\core_configuration.c" />
     <ClCompile Include="core\color.c" />
     <ClCompile Include="entities\entity.c" />
-    <ClCompile Include="entities\player.c" />
-    <ClCompile Include="entities\point.c" />
     <ClCompile Include="core\event_loop.c" />
     <ClCompile Include="core\image.c" />
     <ClCompile Include="core\movement.c" />
-    <ClCompile Include="entities\enemy.c" />
     <ClCompile Include="gameplay\combat.c" />
     <ClCompile Include="gameplay\combat.h" />
     <ClCompile Include="gameplay\taxonomy\species.c" />

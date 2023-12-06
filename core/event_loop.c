@@ -29,26 +29,6 @@ int run_event_loop(ALLEGRO_EVENT_QUEUE* queue, ALLEGRO_TIMER* timer, Taxonomy* t
 
 	Entity* enemy[5];
 
-	//Entity* player = malloc(sizeof * player);
-	//Player* player =
-	//	malloc(sizeof *player);
-
-	/*player->point.x = 100;
-	player->point.y = 100;
-	player->size.width = 64;
-	player->size.height = 128;*/
-
-	int count = 0;
-	//Entity* enemy = create_npc(taxonomy, 1);
-
-	//enemy->point.x = 200;
-	//enemy->point.y = 200;
-	//enemy->size.width = 30;
-	//enemy->size.height = 30;
-
-	//float x, y;
-	//x = 100;
-	//y = 100;
 	srand(time(NULL));
 
 	Entity* player = create_player();
@@ -78,20 +58,8 @@ int run_event_loop(ALLEGRO_EVENT_QUEUE* queue, ALLEGRO_TIMER* timer, Taxonomy* t
 
 			create_hitbox(&enemy[i]->hitbox, enemy[i]->point, enemy[i]->size);
 		}
-		/*if(count == 0)
-		{
 
-
-			count = 120;
-		}
-		--count;*/
-		//Player->hitbox.center.x = Player->point.x;
-		//Player->hitbox.center.y = Player->point.y;
 		create_hitbox(&player->hitbox, player->point, player->size);
-
-
-		//Player->hitbox[1].x = Player->point.x + 10;
-		//Player->hitbox[1].y = Player->point.y + 10;
 
 		al_wait_for_event(queue, &event);
 
@@ -118,25 +86,6 @@ int run_event_loop(ALLEGRO_EVENT_QUEUE* queue, ALLEGRO_TIMER* timer, Taxonomy* t
 
 		if (close)
 			break;
-
-		// Enemy logic
-		/*if(Enemy->point.x < Player->point.x)
-			Enemy->point.x += 0.1f;
-
-		if(Enemy->point.x > Player->point.x)
-			Enemy->point.x -= 0.1f;
-
-		if(Enemy->point.y < Player->point.y)
-			Enemy->point.y += 0.1f;
-
-		if (Enemy->point.y > Player->point.y)
-			Enemy->point.y -= 0.1f;*/
-
-			//const Point direction = calculate_direction(enemy->hitbox, player->hitbox);
-
-			// Move the Enemy towards the Player by the specified speed
-			//enemy->point.x += direction.x * 0.2f;
-			//enemy->point.y += direction.y * 0.2f;
 
 		for (int i = 0; i < size; ++i)
 		{
@@ -191,9 +140,6 @@ int run_event_loop(ALLEGRO_EVENT_QUEUE* queue, ALLEGRO_TIMER* timer, Taxonomy* t
 				}
 
 
-			//al_draw_text(font, al_map_rgb(255, 20, 255), 50, 60, 0, "Hi there!");
-			//al_draw_tinted_bitmap(yanderedev, al_map_rgba(100, 0, 255, 255), 100, 100, 0);
-
 			if ((player->species.evolution == NULL || player->species.evolution->name != "Mion Vermelho") && setup)
 			{
 				free(player);
@@ -204,7 +150,6 @@ int run_event_loop(ALLEGRO_EVENT_QUEUE* queue, ALLEGRO_TIMER* timer, Taxonomy* t
 			setup = false;
 
 
-			//al_draw_textf(font, al_map_rgb(255, 255, 255), 0, 0, 0, "X: %.1f Y: %.1f", player->point.x, player->point.y);
 			al_draw_textf(font, al_map_rgb(255, 255, 255), 0, 0, 0, "Species: %s", player->species.name);
 
 			char* nil = "None";
@@ -213,17 +158,8 @@ int run_event_loop(ALLEGRO_EVENT_QUEUE* queue, ALLEGRO_TIMER* timer, Taxonomy* t
 
 			al_draw_textf(font, al_map_rgb(255, 255, 255), 0, 40, 0, "HP: %d", player->species.hp);
 
-
-			//al_draw_filled_rectangle(player->point.x, player->point.y, player->point.x + player->size.width, player->point.y + player->size.height, get_color(0x4080c4));
-
-			//ALLEGRO_BITMAP* p = player->species.sprite;
-
-			//al_draw_bitmap(p, 10, 10, 0);
-			//draw_resized_image(player->species.sprite, player->point.x, player->point.y, 10, 10);
 			draw_rotated_image(player->species.sprite, player, player->angle);
 
-
-			//al_draw_filled_rectangle(enemy->point.x, enemy->point.y, enemy->point.x + enemy->size.width, enemy->point.y + enemy->size.height, get_color(0xFF80c430));
 
 			for (int i = 0; i < size; ++i)
 			{
@@ -232,8 +168,6 @@ int run_event_loop(ALLEGRO_EVENT_QUEUE* queue, ALLEGRO_TIMER* timer, Taxonomy* t
 
 				draw_rotated_image(enemy[i]->species.sprite, enemy[i], enemy[i]->angle);
 				al_draw_textf(font, al_map_rgb(255, 255, 255), enemy[i]->hitbox.center.x, enemy[i]->hitbox.bottom_left.y + 10, 0, "HP: %d", enemy[i]->species.hp);
-
-				//al_draw_textf(font, al_map_rgb(255, 255, 255), 0, 40 + (i * 10), 0, "NPC %d (X: %.1f Y: %.1f)", i, enemy[i]->point.x, enemy[i]->point.y);
 			}
 
 		end:
@@ -247,7 +181,6 @@ int run_event_loop(ALLEGRO_EVENT_QUEUE* queue, ALLEGRO_TIMER* timer, Taxonomy* t
 	}
 
 	free(player);
-	//free(enemy);
 	al_destroy_font(font);
 
 	return 0;
@@ -255,9 +188,6 @@ int run_event_loop(ALLEGRO_EVENT_QUEUE* queue, ALLEGRO_TIMER* timer, Taxonomy* t
 
 int setup(ALLEGRO_TIMER* timer, ALLEGRO_EVENT_QUEUE* queue, ALLEGRO_DISPLAY* disp)
 {
-
-	//ALLEGRO_FONT* font = al_create_builtin_font();
-
 	al_init_primitives_addon();
 
 	al_register_event_source(queue, al_get_keyboard_event_source());
@@ -268,42 +198,17 @@ int setup(ALLEGRO_TIMER* timer, ALLEGRO_EVENT_QUEUE* queue, ALLEGRO_DISPLAY* dis
 
 	init(al_init_image_addon(), "image addon");
 
-	// ALLEGRO_BITMAP* yanderedev = create_image("yanderedev-image.png");
 
 	Taxonomy* taxonomy = create_taxonomy();
 
 
 	populate_species();
-	/*Species* species = malloc(sizeof * species);
-	species->name = "paulo";
-
-	add_species(species);*/
-	/*Species* species2 = malloc(sizeof * species2);
-	species2->name = "pedro";
-	add_species(species2);*/
-
-	/*Species* species3 = malloc(sizeof * species3);
-	species3->name = "matheus";
-	add_species(species3);*/
-
-
-	/*for (int i = 0; i < taxonomy->size; ++i)
-	{
-		printf("\n\n%s\n", taxonomy->species[i].name);
-	}*/
-
-	////remove_species(taxonomy->species[s]);
-	//for (int i = 0; i < taxonomy->size; ++i)
-	//{
-	//	printf("\n\n%s\n", taxonomy->species[i].name);
-	//}
-
+	
 	// This is where the event loop starts
 
 	int code = run_event_loop(queue, timer, taxonomy);
 
 	// Shutdown
-	//destroy_image(yanderedev);
 	al_destroy_display(disp);
 	al_destroy_timer(timer);
 	al_destroy_event_queue(queue);
@@ -325,8 +230,6 @@ int setup(ALLEGRO_TIMER* timer, ALLEGRO_EVENT_QUEUE* queue, ALLEGRO_DISPLAY* dis
 
 		setup(timer, queue, disp);
 	}
-
-	
 
 	return 0;
 }

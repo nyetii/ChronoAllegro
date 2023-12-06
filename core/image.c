@@ -22,10 +22,6 @@ void draw_resized_image(ALLEGRO_BITMAP* image, int x, int y, int w, int h)
 
 void draw_rotated_image(ALLEGRO_BITMAP* image, Entity* entity, float angle)
 {
-	//al_draw_scaled_rotated_bitmap(image, entity->point.x + entity->size.width, entity->point.y + entity->size.height / 2.0f,
-	//	entity->point.x + entity->size.width / 2.0f, entity->point.y + entity->size.height / 2.0f,
-	//	0.1, 0.1, to_radians(angle), 0);
-
 	for (int i = 0; i < TAXONOMY->size; ++i)
 	{
 		TAXONOMY->species[i];

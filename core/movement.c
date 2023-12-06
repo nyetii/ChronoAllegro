@@ -24,12 +24,6 @@ void movement(const ALLEGRO_KEYBOARD_STATE ks, Entity* player)
 	//printf("\nRadians: %.2f", to_radians(player->angle));
 	if (al_key_down(&ks, ALLEGRO_KEY_UP))
 	{
-		/*if (player->angle >= 1.0f && player->angle < 180.0f)
-			player->angle -= 1.0f;
-		else if (player->angle <= 359.0f && player->angle >= 180.0f)
-			player->angle += 1.0f;
-		else
-			player->angle = 0.0f;*/
 
 		
 
@@ -43,12 +37,6 @@ void movement(const ALLEGRO_KEYBOARD_STATE ks, Entity* player)
 
 	if (al_key_down(&ks, ALLEGRO_KEY_DOWN))
 	{
-		/*if (player->angle >= 1.0f && player->angle < 179.0f)
-			player->angle += 1.0f;
-		else if (player->angle <= 360.0f && player->angle > 180.0f)
-			player->angle -= 1.0f;
-		else
-			player->angle = 180.0f;*/
 
 		if (player->angle < 180.0 && player->angle > 0.0)
 			player->angle += 1.0f;
@@ -60,12 +48,6 @@ void movement(const ALLEGRO_KEYBOARD_STATE ks, Entity* player)
 
 	if (al_key_down(&ks, ALLEGRO_KEY_LEFT))
 	{
-		/*if (player->angle <= 269.0f && player->angle > 90.0f)
-			player->angle += 1.0f;
-		else if (player->angle <= 90.0f && player->angle > 269.0f)
-			player->angle -= 1.0f;
-		else
-			player->angle = 270.0f;*/
 
 		if (player->angle > 270 || player->angle < 90)
 			player->angle -= 1.0f;
@@ -77,12 +59,6 @@ void movement(const ALLEGRO_KEYBOARD_STATE ks, Entity* player)
 
 	if (al_key_down(&ks, ALLEGRO_KEY_RIGHT))
 	{
-		/*if (player->angle > 91.0f && player->angle <= 270.0f)
-			player->angle -= 1.0f;
-		else if (player->angle >= 270.0f && player->angle > 450.0f || player->angle >= -90 && player->angle <= 90)
-			player->angle += 1.0f;
-		else
-			player->angle = 90.0f;*/
 
 		if (player->angle > 270 || player->angle < 90)
 			player->angle += 1.0f;
@@ -126,10 +102,8 @@ void npc_movement(Entity* entity, Entity* player)
 
 	double tan = atan2(deltaY, deltaX);
 
-	//double angle = p_hitbox.center.y + 10.0 / entity->point.x;
 	entity->angle = to_degrees(tan);
 
-	// Move the Enemy towards the Player by the specified speed
 	entity->point.x += direction.x * entity->species.speed;
 	entity->point.y += direction.y * entity->species.speed;
 }

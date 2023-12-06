@@ -35,14 +35,11 @@ int add_species(Species species)
 	TAXONOMY->species[index] = species;
 	++TAXONOMY->size;
 
-	//free(species);
 	return index;
 }
 
 int remove_species(Species species)
 {
-	//taxonomy = realloc(taxonomy, sizeof(*taxonomy) - sizeof(*species));
-
 	Species* temp = malloc(TAXONOMY->size * sizeof(*temp));
 
 	for(int i = 0, j = 0; i < TAXONOMY->size; ++i)

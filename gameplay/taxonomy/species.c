@@ -18,10 +18,6 @@ int create_species(char* name, char* sprite, int hp, int atk, int def, float spe
 	};
 
 	srand(time(NULL));
-
-	//int r = playable == 1 ? 255 : rand() % 256;
-	//int g = playable == 1 ? 255 : rand() % 256;
-	//int b = playable == 1 ? 255 : rand() % 256;
 	
 	species.color = al_map_rgb(255, 255, 255);
 	species.sprite = bitmap;

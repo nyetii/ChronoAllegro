@@ -73,21 +73,6 @@ Entity* create_npc_any(Entity* player)
 
 int first_not_playable(Entity* player)
 {
-	/*for(int i = index; i < index + 2; ++i)
-	{
-		if (&TAXONOMY->species[i] == NULL) continue;
-
-		if (TAXONOMY->species[i].playable == -1)
-			return i;
-	}
-
-	for (int i = index - 1; i > index - 3; --i)
-	{
-		if (&TAXONOMY->species[i] == NULL) continue;
-
-		if (TAXONOMY->species[i].playable == -1)
-			return i;
-	}*/
 
 	int random = rand() % TAXONOMY->size;
 

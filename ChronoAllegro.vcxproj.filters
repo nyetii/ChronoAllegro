@@ -57,20 +57,11 @@
     <ClCompile Include="core\event_loop.c">
       <Filter>Source Files\Core</Filter>
     </ClCompile>
-    <ClCompile Include="entities\player.c">
-      <Filter>Source Files\Entities</Filter>
-    </ClCompile>
-    <ClCompile Include="entities\point.c">
-      <Filter>Source Files\Entities</Filter>
-    </ClCompile>
     <ClCompile Include="core\color.c">
       <Filter>Source Files\Core</Filter>
     </ClCompile>
     <ClCompile Include="core\movement.c">
       <Filter>Source Files\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="entities\enemy.c">
-      <Filter>Source Files\Entities</Filter>
     </ClCompile>
     <ClCompile Include="physics\collision.c">
       <Filter>Source Files\Physics</Filter>
